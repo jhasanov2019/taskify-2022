@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.abbTask.mapper.CustomerMapper">
+
+    <insert id="addCustomer" parameterType="com.project.abbTask.model.dto.AddCustomerDto">
+        insert into taskify.customer(id, name, password, mail, status, organization_id)
+        values (uuid_in(md5(random()::text || clock_timestamp()::text)::cstring),#{request.username},#{request.password},#{request.mail},#{request.status},#{request.organizationId})
+    </insert>
+
+    <select id="getCustomerByName" resultType="com.project.abbTask.model.Customer" resultMap="customerResultMap">
+        select id, name, password, mail, status from taskify.customer where customer.name = #{name}
+    </select>
+    <select id="getAllCustomers" resultType="java.util.List" resultMap="customerDtoResultMap">
+        select  id, name, mail, status from taskify.customer;
+    </select>
+
+    <resultMap id="customerDtoResultMap" type="com.project.abbTask.model.dto.CustomerDto">
+        <result property="id" column="id" typeHandler="com.project.abbTask.config.UUIDTypeHandler"/>
+        <result property="username" column="name"/>
+        <result property="status" column="status"/>
+        <result property="mail" column="mail"/>
+    </resultMap>
+
+    <resultMap id="customerResultMap" type="com.project.abbTask.model.Customer">
+        <result property="username" column="name"/>
+        <result property="password" column="password"/>
+        <result property="mail" column="mail"/>
+        <result property="status" column="status"/>
+        <result property="password" column="password"/>
+    </resultMap>
+</mapper>

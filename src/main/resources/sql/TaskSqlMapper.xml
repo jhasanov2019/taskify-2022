@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.abbTask.mapper.TaskMapper">
+
+    <insert id="addTask" parameterType="com.project.abbTask.model.dto.AddTaskDto">
+        insert into taskify.task(id, name , description, status, deadline)
+        VALUES(uuid_in(md5(random()::text || clock_timestamp()::text)::cstring), #{request.name},#{request.description},#{request.status},#{request.deadline})
+    </insert>
+
+    <insert id="assignTask" parameterType="com.project.abbTask.model.dto.AssignTaskDto">
+        insert into taskify.task_customer(id, task_id, customer_id) values
+        <foreach item="customerId" index="index" collection="request.customerIds" separator=",">
+            (uuid_in(md5(random()::text || clock_timestamp()::text)::cstring), #{request.taskId}, #{customerId,typeHandler=com.project.abbTask.config.UUIDTypeHandler})
+        </foreach>
+    </insert>
+    <select id="getTask" resultType="java.util.List" resultMap="taskResultMap">
+        select  t.name t_name, t.status t_status, t.description t_description, t.deadline t_deadline, c.name c_name, c.mail c_mail, c.status c_status,  o.name o_name from taskify.task t
+                                                                                                                                                    left join taskify.task_customer tc on t.id = tc.task_id
+                                                                                                                                                    left join taskify.customer c on c.id = tc.customer_id
+                                                                                                                                                    left join taskify.organization o on o.id = c.organization_id
+        where o.id = #{organizationId}
+    </select>
+
+    <resultMap id="taskResultMap" type="com.project.abbTask.model.dto.TaskDto">
+        <result column="t_name" property="name"/>
+        <result column="t_description" property="description"/>
+        <result column="t_status" property="status"/>
+        <result column="t_deadline" property="deadline"/>
+        <collection property="customers" resultMap="customerDtoResultMap"/>
+    </resultMap>
+
+    <resultMap id="customerDtoResultMap" type="com.project.abbTask.model.dto.TaskCustomerDto">
+        <result column="c_name" property="username"/>
+        <result column="c_mail" property="mail"/>
+        <result column="o_name" property="organizationName"/>
+    </resultMap>
+
+
+
+</mapper>

@@ -1,0 +1,30 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api/dev/taskify
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: root
+  liquibase:
+    enabled: true
+    change-log: classpath:changelog/changelog-taskify.xml
+  mail:
+    host: smtp.mailtrap.io
+    port: 25
+    username: d8278e258af904
+    password: 01bd19ecad85d8
+    properties:
+      starttls.enable: true
+
+
+mybatis:
+  mapper-locations: classpath:sql/*.xml
+  config-location: classpath:config/mybatis.xml
+
+logging:
+  level:
+    com.project.abbTask.mapper: DEBUG
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <include file="changeset/create-taskify-schema-2022-04-15.xml" relativeToChangelogFile="true"/>
+    <include file="changeset/create-organization-table-2022-04-15.xml" relativeToChangelogFile="true"/>
+    <include file="changeset/create-customer-table-2022-04-15.xml" relativeToChangelogFile="true"/>
+    <include file="changeset/create-task-table-2022-04-15.xml" relativeToChangelogFile="true"/>
+    <include file="changeset/create-default-organization-2022-04-15.xml" relativeToChangelogFile="true"/>
+    <include file="changeset/create-task-customer-table-2022-04-16.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

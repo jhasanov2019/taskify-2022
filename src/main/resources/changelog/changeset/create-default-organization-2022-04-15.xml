@@ -1,0 +1,26 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.3.xsd">
+
+    <changeSet id="2022-04-15-create-organization-and-admin" author="jalil_hasan">
+        <insert schemaName="taskify" tableName="organization">
+            <column name="id" value="0e73038b-b0fb-4990-a379-dd5c172e25d9" type="uuid"/>
+            <column name="name" value="Test"/>
+            <column name="mail" value="jhasanov2019@gmail.com"/>
+            <column name="phone_number" value="+994556935092"/>
+        </insert>
+        <insert schemaName="taskify" tableName="customer" >
+            <column name="id" value="ff67b484-cb84-431f-809a-945025d82b3a" type="uuid"/>
+            <column name="name" value="admin"/>
+            <column name="password" value="$2a$12$t4uZapCCZRnlN0ulgiQRNO1/xzaxpK4EY/2F6lSvMmgSSU348ljte"/>
+            <column name="mail" value="jhasanov2019@gmail.com"/>
+            <column name="status" value="ADMIN"/>
+            <column name="organization_id" value="0e73038b-b0fb-4990-a379-dd5c172e25d9"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
