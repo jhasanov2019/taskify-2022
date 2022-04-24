@@ -6,6 +6,7 @@ import com.project.abbTask.model.dto.AddCustomerDto;
 import com.project.abbTask.model.dto.AddOrganizationDto;
 import com.project.abbTask.model.dto.SignUpOrganizationDto;
 import com.project.abbTask.model.enums.CustomerStatus;
+import com.project.abbTask.service.CustomerService;
 import com.project.abbTask.service.OrganizationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,11 +17,11 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class OrganizationServiceImpl implements OrganizationService {
-    private final CustomerMapper customerMapper;
     private final PasswordEncoder passwordEncoder;
     private final OrganizationMapper mapper;
+    private final CustomerService customerService;
     @Override
-    public void signUp(SignUpOrganizationDto request) {
+    public void signUp(SignUpOrganizationDto request){
         UUID organizationId = UUID.randomUUID();
         AddOrganizationDto addOrganizationDto = AddOrganizationDto.builder()
                                                                             .name(request.getOrganizationName())
@@ -36,6 +37,6 @@ public class OrganizationServiceImpl implements OrganizationService {
                                                                             .username(request.getUsername())
                                                                             .build();
         mapper.addOrganization(addOrganizationDto);
-        customerMapper.addCustomer(addCustomerDto);
+        customerService.addCustomer(addCustomerDto);
     }
 }

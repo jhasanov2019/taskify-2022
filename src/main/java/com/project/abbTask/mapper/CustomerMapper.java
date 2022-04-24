@@ -17,4 +17,6 @@ public interface CustomerMapper {
 
 
     List<CustomerDto> getAllCustomers();
+
+    Customer getCustomerByMail(String name);
 }

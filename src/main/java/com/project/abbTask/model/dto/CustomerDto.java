@@ -16,6 +16,7 @@ import java.util.UUID;
 public class CustomerDto {
     private UUID id;
     private String username;
+    private String password;
     private String mail;
     private CustomerStatus status;
 }

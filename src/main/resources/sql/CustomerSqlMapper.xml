@@ -13,12 +13,16 @@
         select id, name, password, mail, status from taskify.customer where customer.name = #{name}
     </select>
     <select id="getAllCustomers" resultType="java.util.List" resultMap="customerDtoResultMap">
-        select  id, name, mail, status from taskify.customer;
+        select  id, name, password, mail, status from taskify.customer;
+    </select>
+    <select id="getCustomerByMail" resultType="com.project.abbTask.model.Customer">
+        select id, name, password, mail, status from taskify.customer where customer.mail = #{name}
     </select>
 
     <resultMap id="customerDtoResultMap" type="com.project.abbTask.model.dto.CustomerDto">
         <result property="id" column="id" typeHandler="com.project.abbTask.config.UUIDTypeHandler"/>
         <result property="username" column="name"/>
+        <result property="password" column="password"/>
         <result property="status" column="status"/>
         <result property="mail" column="mail"/>
     </resultMap>

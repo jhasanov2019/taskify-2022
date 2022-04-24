@@ -1,9 +1,6 @@
 package com.project.abbTask.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Date;
 
@@ -13,8 +10,11 @@ import java.sql.Date;
 @NoArgsConstructor
 public class AddTaskDto {
 
+    @NonNull
     private String name;
+    @NonNull
     private String description;
+    @NonNull
     private String status;
     private Date deadline;
 

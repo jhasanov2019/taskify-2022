@@ -1,10 +1,6 @@
 package com.project.abbTask.model.dto;
-
-import com.project.abbTask.model.enums.CustomerStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.UUID;
 
@@ -12,10 +8,16 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Validated
 public class AddCustomerDto {
+    @NonNull
     private String username;
+    @NonNull
     private String password;
+    @NonNull
     private String status;
+    @NonNull
     private UUID organizationId;
+    @NonNull
     private String mail;
 }

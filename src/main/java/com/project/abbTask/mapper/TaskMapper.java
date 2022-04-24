@@ -1,5 +1,6 @@
 package com.project.abbTask.mapper;
 
+import com.project.abbTask.model.Task;
 import com.project.abbTask.model.dto.AddTaskDto;
 import com.project.abbTask.model.dto.AssignTaskDto;
 import com.project.abbTask.model.dto.TaskDto;
@@ -17,4 +18,6 @@ public interface TaskMapper {
     void assignTask(@Param("request") AssignTaskDto request);
 
     List<TaskDto> getTask(@Param("organizationId") UUID organizationId);
+
+    Task getTaskByName(@Param("name") String name);
 }
