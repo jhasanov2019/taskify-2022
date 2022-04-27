@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -30,8 +29,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void addTask(AddTaskDto request) {
-        if (Objects.nonNull(mapper.getTaskByName(request.getName()))){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Task already exist");
+        if (mapper.getTaskByName(request.getName()).isPresent()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Task already exist");
         }
         request.setStatus(TaskStatus.BACKLOG.name());
         mapper.addTask(request);

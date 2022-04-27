@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Mapper
@@ -19,5 +20,5 @@ public interface TaskMapper {
 
     List<TaskDto> getTask(@Param("organizationId") UUID organizationId);
 
-    Task getTaskByName(@Param("name") String name);
+    Optional<Task> getTaskByName(@Param("name") String name);
 }

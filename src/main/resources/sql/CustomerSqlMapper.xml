@@ -9,13 +9,13 @@
         values (uuid_in(md5(random()::text || clock_timestamp()::text)::cstring),#{request.username},#{request.password},#{request.mail},#{request.status},#{request.organizationId})
     </insert>
 
-    <select id="getCustomerByName" resultType="com.project.abbTask.model.Customer" resultMap="customerResultMap">
+    <select id="getCustomerByName" resultType="java.util.Optional" resultMap="customerResultMap">
         select id, name, password, mail, status from taskify.customer where customer.name = #{name}
     </select>
     <select id="getAllCustomers" resultType="java.util.List" resultMap="customerDtoResultMap">
         select  id, name, password, mail, status from taskify.customer;
     </select>
-    <select id="getCustomerByMail" resultType="com.project.abbTask.model.Customer">
+    <select id="getCustomerByMail" resultType="java.util.Optional" resultMap="customerResultMap">
         select id, name, password, mail, status from taskify.customer where customer.mail = #{name}
     </select>
 

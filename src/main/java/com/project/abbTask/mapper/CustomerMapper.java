@@ -7,16 +7,17 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface CustomerMapper {
 
     void addCustomer(@Param("request") AddCustomerDto request);
 
-    Customer getCustomerByName(@Param("name") String name);
+   Optional <Customer> getCustomerByName(@Param("name") String name);
 
 
     List<CustomerDto> getAllCustomers();
 
-    Customer getCustomerByMail(String name);
+    Optional<Customer> getCustomerByMail(String name);
 }

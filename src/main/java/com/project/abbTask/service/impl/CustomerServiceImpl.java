@@ -38,9 +38,9 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
     public void addCustomer(AddCustomerDto addCustomerDto) {
         if (addCustomerDto.getPassword().length()>6){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Password exceeds length of 6.");
-        }else if (Objects.nonNull(mapper.getCustomerByName(addCustomerDto.getUsername()))){
+        }else if (mapper.getCustomerByName(addCustomerDto.getUsername()).isPresent()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Username exists.");
-        }else if (Objects.nonNull(mapper.getCustomerByMail(addCustomerDto.getMail()))){
+        }else if (mapper.getCustomerByMail(addCustomerDto.getMail()).isPresent()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"This mail is used.");
         }
         addCustomerDto.setPassword(passwordEncoder.encode(addCustomerDto.getPassword()));
@@ -52,7 +52,7 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-       Customer customer = Optional.ofNullable(mapper.getCustomerByName(name)).orElseThrow(()-> new UsernameNotFoundException("user nor found"));
+       Customer customer = mapper.getCustomerByName(name).orElseThrow(()-> new UsernameNotFoundException("user nor found"));
        Collection<SimpleGrantedAuthority>authorities = new ArrayList<>();
        authorities.add(new SimpleGrantedAuthority(customer.getStatus().name()));
 
