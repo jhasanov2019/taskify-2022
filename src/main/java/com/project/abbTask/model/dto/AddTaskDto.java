@@ -9,7 +9,6 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddTaskDto {
-
     @NonNull
     private String name;
     @NonNull
@@ -17,5 +16,4 @@ public class AddTaskDto {
     @NonNull
     private String status;
     private Date deadline;
-
 }

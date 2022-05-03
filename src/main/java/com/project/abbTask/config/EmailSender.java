@@ -7,15 +7,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmailSender {
     private JavaMailSender javaMailSender;
-
     public EmailSender(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
-
     public void sendMail(String toEmail, String subject, String message) {
-
         var mailMessage = new SimpleMailMessage();
-
         mailMessage.setTo(toEmail);
         mailMessage.setSubject(subject);
         mailMessage.setText(message);

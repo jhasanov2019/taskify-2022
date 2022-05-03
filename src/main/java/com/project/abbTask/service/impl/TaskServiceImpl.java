@@ -49,15 +49,13 @@ public class TaskServiceImpl implements TaskService {
                     emailSender.sendMail(c.getMail(),"new task","task assigned");
                     return c;
                 }).collect(Collectors.toList());
-
-
     }
 
     @Override
     public TaskListResponse getTasks(UUID organizationId) {
         return mapstruct.map(TaskListResponseDto.builder()
                                                           .tasks(mapper.getTask(organizationId))
-                .build()
+                                                .build()
         );
     }
 
@@ -68,6 +66,4 @@ public class TaskServiceImpl implements TaskService {
                                                  .build()
         );
     }
-
-
 }

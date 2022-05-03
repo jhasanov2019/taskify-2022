@@ -11,7 +11,6 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface TaskMapstruct {
-
     @Mapping(target = "tasks", source = "dto.tasks")
     TaskListResponse map(TaskListResponseDto dto);
 
@@ -19,6 +18,4 @@ public interface TaskMapstruct {
     TaskResponse map(TaskDto dto);
 
     TaskCustomerResponse map(TaskCustomerDto dto);
-
-
 }

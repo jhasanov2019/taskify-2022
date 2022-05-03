@@ -46,5 +46,4 @@ public class TaskController {
     public TaskListResponse getCustomerTasks(@PathVariable("customerId")UUID cutomerId){
         return service.getCustomerTasks(cutomerId);
     }
-
 }

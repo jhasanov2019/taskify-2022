@@ -6,8 +6,6 @@ import java.util.UUID;
 
 @Data
 public class AssignTaskCustomerDto {
-
     private UUID id;
     private String customerMail;
-
 }
