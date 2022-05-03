@@ -41,4 +41,10 @@ public class TaskController {
         return service.getTasks(organizationId);
     }
 
+    @GetMapping("/getCustomerTasks/{customerId}")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    public TaskListResponse getCustomerTasks(@PathVariable("customerId")UUID cutomerId){
+        return service.getCustomerTasks(cutomerId);
+    }
+
 }

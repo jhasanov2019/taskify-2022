@@ -12,9 +12,16 @@
     <select id="getCustomerByName" resultType="java.util.Optional" resultMap="customerResultMap">
         select id, name, password, mail, status from taskify.customer where customer.name = #{name}
     </select>
+    
     <select id="getAllCustomers" resultType="java.util.List" resultMap="customerDtoResultMap">
-        select  id, name, password, mail, status from taskify.customer;
+        select  id, name, password, mail, status from taskify.customer
+        <where>
+            <foreach item="customerId" index="index" collection="customerIds" separator="," open="id =(" close=")">
+                #{customerId,typeHandler=com.project.abbTask.config.UUIDTypeHandler}
+            </foreach>
+        </where>
     </select>
+
     <select id="getCustomerByMail" resultType="java.util.Optional" resultMap="customerResultMap">
         select id, name, password, mail, status from taskify.customer where customer.mail = #{name}
     </select>

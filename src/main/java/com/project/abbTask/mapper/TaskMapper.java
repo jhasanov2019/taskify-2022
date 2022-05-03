@@ -21,4 +21,6 @@ public interface TaskMapper {
     List<TaskDto> getTask(@Param("organizationId") UUID organizationId);
 
     Optional<Task> getTaskByName(@Param("name") String name);
+
+    List<TaskDto> getCustomerTasks(@Param("customerId") UUID customerId);
 }

@@ -16,4 +16,5 @@ public interface TaskService {
 
     TaskListResponse getTasks(UUID organizationId);
 
+    TaskListResponse getCustomerTasks(UUID customerId);
 }

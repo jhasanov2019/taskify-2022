@@ -15,12 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class OrganizationController {
     private final OrganizationService organizationService;
-
     @PostMapping("/sign/up")
     public ResponseEntity<Void> signUp(@RequestBody SignUpOrganizationDto request){
         organizationService.signUp(request);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-
-
 }

@@ -14,10 +14,12 @@ import com.project.abbTask.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -37,24 +39,35 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @Transactional
     public void assignTask(AssignTaskDto request) {
         mapper.assignTask(request);
-        List<CustomerDto>customers = customerMapper.getAllCustomers();
-        for (CustomerDto customer:customers){
-            for (UUID customerId:request.getCustomerIds()){
-                if (customerId.equals(customer.getId())) {
-                    emailSender.sendMail(customer.getMail(), request.getTaskName(), request.getTaskDescription());
-                }
-            }
-        }
+        List<CustomerDto>customers = customerMapper.getAllCustomers(request.getCustomerIds());
+        customers
+                .stream()
+                .map(c->{
+                    emailSender.sendMail(c.getMail(),"new task","task assigned");
+                    return c;
+                }).collect(Collectors.toList());
+
+
     }
 
     @Override
     public TaskListResponse getTasks(UUID organizationId) {
-        return mapstruct.map(TaskListResponseDto.builder().tasks(mapper.getTask(organizationId)).build());
+        return mapstruct.map(TaskListResponseDto.builder()
+                                                          .tasks(mapper.getTask(organizationId))
+                .build()
+        );
     }
 
-
+    @Override
+    public TaskListResponse getCustomerTasks(UUID customerId) {
+        return mapstruct.map(TaskListResponseDto.builder()
+                                                          .tasks(mapper.getCustomerTasks(customerId))
+                                                 .build()
+        );
+    }
 
 
 }

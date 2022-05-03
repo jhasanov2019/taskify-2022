@@ -26,6 +26,15 @@
                                                                                                                                                     left join taskify.organization o on o.id = c.organization_id
         where o.id = #{organizationId}
     </select>
+    <select id="getCustomerTasks" resultType="java.util.List" resultMap="taskDtoResultMap">
+        select  t.name t_name, t.status t_status, t.description t_description, t.deadline t_deadline, c.name c_name, c.mail c_mail, c.status c_status,  o.name o_name
+        from taskify.task t
+                 left join taskify.task_customer tc on t.id = tc.task_id
+                 left join taskify.customer c on c.id = tc.customer_id
+                 left join taskify.organization o on o.id = c.organization_id
+        where t.id = (select ta.task_id from taskify.task_customer ta left join taskify.customer c on ta.customer_id = c.id where ta.customer_id=#{customerId})
+
+    </select>
 
     <resultMap id="taskResultMap" type="com.project.abbTask.model.Task">
         <result column="status" property="status"/>

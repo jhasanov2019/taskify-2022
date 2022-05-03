@@ -14,8 +14,6 @@ import java.util.UUID;
 @Builder
 public class AssignTaskDto {
     private UUID taskId;
-    private String taskName;
-    private String taskDescription;
     private List<UUID> customerIds;
 
 
