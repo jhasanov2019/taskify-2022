@@ -13,7 +13,7 @@
         select id, name, password, mail, status from taskify.customer where customer.name = #{name}
     </select>
     
-    <select id="getAllCustomers" resultType="java.util.List" resultMap="customerDtoResultMap">
+    <select id="getCustomersByIds" resultType="java.util.List" resultMap="customerDtoResultMap">
         select  id, name, password, mail, status from taskify.customer
         <where>
             <foreach item="customerId" index="index" collection="customerIds" separator="," open="id =(" close=")">

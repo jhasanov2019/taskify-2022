@@ -42,7 +42,7 @@ public class TaskServiceImpl implements TaskService {
     @Transactional
     public void assignTask(AssignTaskDto request) {
         mapper.assignTask(request);
-        List<CustomerDto>customers = customerMapper.getAllCustomers(request.getCustomerIds());
+        List<CustomerDto>customers = customerMapper.getCustomersByIds(request.getCustomerIds());
         customers
                 .stream()
                 .map(c->{

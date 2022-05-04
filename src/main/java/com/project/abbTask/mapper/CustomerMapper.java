@@ -18,7 +18,7 @@ public interface CustomerMapper {
 
     Optional <Customer> getCustomerByName(@Param("name") String name);
 
-    List<CustomerDto> getAllCustomers(@Param("customerIds") List<UUID>customerIds);
+    List<CustomerDto> getCustomersByIds(@Param("customerIds") List<UUID>customerIds);
 
     Optional<Customer> getCustomerByMail(@Param("name") String name);
 }
